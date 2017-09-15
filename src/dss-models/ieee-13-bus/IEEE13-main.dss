@@ -42,17 +42,17 @@ Set Controlmode=OFF
  set mode=daily
  set stepsize=1h
  set number=12
-Solve
+! Solve
 ! ------------------------------------------------------------------------------------------------ !
 
 ! -------------------------------------------- Output Setup -------------------------------------- !
-Export monitors 650632_voltage
-Plot monitor object= 650632_voltage channels=(1 3 5) bases=[2400 2400 2400]
+! Export monitors 650632_voltage
+! Plot monitor object= 650632_voltage channels=(1 3 5) bases=[2400 2400 2400]
 
-Plot Profile Phases=All
-Visualize voltages "Line.671680"
-plot circuit Power max=2000 n n C1=$00FF0000
+! Plot Profile Phases=All
+! Visualize voltages "Line.671680"
+! plot circuit Power max=2000 n n C1=$00FF0000
 
-Export monitors 650632_power
-Plot monitor object= 650632_power channels=(1 3 5)
+! Export monitors 650632_power
+! Plot monitor object= 650632_power channels=(1 3 5)
 ! ------------------------------------------------------------------------------------------------ !

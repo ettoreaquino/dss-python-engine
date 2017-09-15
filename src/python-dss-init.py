@@ -39,7 +39,7 @@ class DSS(object):
         return version
 
 if __name__ == '__main__':
-    myObject = DSS("IEEE13-main.dss")
+    myObject = DSS('dss-models\ieee-13-bus\IEEE13-main.dss')
 
     myObject.mySolve()
     myObject.myShowPower()
