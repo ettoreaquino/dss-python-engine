@@ -24,9 +24,8 @@ redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Capac
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Switches_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\PV_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Monitors_IEEE13.dss"
-BusCoords "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\IEEE13Node_XYCoordinates.csv"
 
-New EnergyMeter.medidor1 element=Line.650632 terminal=1
+New EnergyMeter.meter1 element=Line.650632 terminal=1
 ! ------------------------------------------------------------------------------------------------ !
 
 
@@ -42,7 +41,10 @@ Set Controlmode=OFF
  set mode=daily
  set stepsize=1h
  set number=12
-! Solve
+Solve
+
+BusCoords IEEE13Node_XYCoordinates.csv
+plot circuit Power max=2000 n n C1=$00FF0000
 ! ------------------------------------------------------------------------------------------------ !
 
 ! -------------------------------------------- Output Setup -------------------------------------- !

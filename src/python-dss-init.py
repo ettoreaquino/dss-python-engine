@@ -3,7 +3,7 @@ __author__ = 'Ettore Aquino'
 
 import win32com.client
 
-class DSS(object):
+class OpenDSSInitializer(object):
 
     def __init__(self, dssFileName):
 
@@ -18,6 +18,8 @@ class DSS(object):
             self.dssText = self.dssObj.Text
             self.dssCircuit = self.dssObj.ActiveCircuit
             self.dssSolution = self.dssCircuit.Solution
+            self.dssElem = self.dssCircuit.ActiveCktElement
+            self.dssBus = self.dssCircuit.ActiveBus
 
         # Always a good a idea to clear the DSS when loading a new circuit
         self.dssObj.ClearAll()
@@ -25,23 +27,12 @@ class DSS(object):
         # Load the given circuit master file into OpenDSS
         self.dssText.Command = "Compile " + dssFileName
 
-    def mySolve(self):
-
-        self.dssSolution.Solve()
-
-    def myShowPower(self):
-
-        self.dssText.Command = "show power elements"
-
     def versionDSS(self):
 
-        version = self.dssObj.Version
-        return version
+        return self.dssObj.Version
 
 if __name__ == '__main__':
-    myObject = DSS('dss-models\ieee-13-bus\IEEE13-main.dss')
+    myObject = OpenDSSInitializer('dss-models\ieee-13-bus\IEEE13-main.dss')
 
-    myObject.mySolve()
-    myObject.myShowPower()
     opendssVersion = myObject.versionDSS()
     print opendssVersion
