@@ -1,0 +1,58 @@
+Clear 
+
+! This script is based on a script developed by Tennessee Tech Univ students
+! Tyler Patton, Jon Wood, and David Woods, April 2009
+!
+! ================================================================================================ !
+!                                           Initialization                                         !
+! ================================================================================================ !
+
+! ----------------------------------------- New Substation --------------------------------------- !
+new circuit.IEEE13Nodeckt 
+~ basekv=115 pu=1.0001 phases=3 bus1=SourceBus
+~ Angle=30                     ! angle 30 deg advanced so results agree with published angle
+~ MVAsc3=20000 MVASC1=21000    ! stiffen the source to approximate inf source
+! ------------------------------------------------------------------------------------------------ !
+
+! ------------------------------------- Input Setup for IEEE 13 ---------------------------------- !
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Transformers_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\IEEELineCodes.DSS" 
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\LoadProfiles_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Loads_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Lines_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Capacitors_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Switches_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\PV_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Monitors_IEEE13.dss"
+BusCoords "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\IEEE13Node_XYCoordinates.csv"
+
+New EnergyMeter.medidor1 element=Line.650632 terminal=1
+! ------------------------------------------------------------------------------------------------ !
+
+
+! ================================================================================================ !
+!                                  Solution, Plots and Visualization                               !
+! ================================================================================================ !
+
+! ------------------------------------------- Solve Setup ---------------------------------------- !
+Set Voltagebases=[115, 4.16, .48]
+calcVoltagebases
+
+Set Controlmode=OFF
+ set mode=daily
+ set stepsize=1h
+ set number=12
+Solve
+! ------------------------------------------------------------------------------------------------ !
+
+! -------------------------------------------- Output Setup -------------------------------------- !
+Export monitors 650632_voltage
+Plot monitor object= 650632_voltage channels=(1 3 5) bases=[2400 2400 2400]
+
+Plot Profile Phases=All
+Visualize voltages "Line.671680"
+plot circuit Power max=2000 n n C1=$00FF0000
+
+Export monitors 650632_power
+Plot monitor object= 650632_power channels=(1 3 5)
+! ------------------------------------------------------------------------------------------------ !
