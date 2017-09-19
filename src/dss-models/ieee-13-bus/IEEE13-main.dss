@@ -16,7 +16,8 @@ new circuit.IEEE13Nodeckt
 
 ! ------------------------------------- Input Setup for IEEE 13 ---------------------------------- !
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Transformers_IEEE13.dss"
-redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\IEEELineCodes.DSS" 
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Regulators_IEEE13.dss"
+redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\IEEELineCodes_IEEE13.DSS" 
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\LoadProfiles_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Loads_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Lines_IEEE13.dss"
@@ -37,14 +38,13 @@ New EnergyMeter.meter1 element=Line.650632 terminal=1
 Set Voltagebases=[115, 4.16, .48]
 calcVoltagebases
 
-Set Controlmode=OFF
- set mode=daily
- set stepsize=1h
- set number=12
-Solve
+// Set Controlmode=OFF
+//  set mode=daily
+//  set stepsize=1h
+//  set number=12
+// Solve
 
 BusCoords IEEE13Node_XYCoordinates.csv
-plot circuit Power max=2000 n n C1=$00FF0000
 ! ------------------------------------------------------------------------------------------------ !
 
 ! -------------------------------------------- Output Setup -------------------------------------- !

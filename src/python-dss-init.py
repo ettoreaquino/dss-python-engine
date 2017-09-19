@@ -32,7 +32,7 @@ class OpenDSSInitializer(object):
         return self.dssObj.Version
 
 if __name__ == '__main__':
-    myObject = OpenDSSInitializer('dss-models\ieee-13-bus\IEEE13-main.dss')
+    myObject = OpenDSSInitializer('IEEE13-main.dss')
 
     opendssVersion = myObject.versionDSS()
     print opendssVersion
