@@ -29,7 +29,6 @@ redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Monit
 New EnergyMeter.meter1 element=Line.650632 terminal=1
 ! ------------------------------------------------------------------------------------------------ !
 
-
 ! ================================================================================================ !
 !                                  Solution, Plots and Visualization                               !
 ! ================================================================================================ !
@@ -37,12 +36,6 @@ New EnergyMeter.meter1 element=Line.650632 terminal=1
 ! ------------------------------------------- Solve Setup ---------------------------------------- !
 Set Voltagebases=[115, 4.16, .48]
 calcVoltagebases
-
-// Set Controlmode=OFF
-//  set mode=daily
-//  set stepsize=1h
-//  set number=12
-// Solve
 
 BusCoords IEEE13Node_XYCoordinates.csv
 ! ------------------------------------------------------------------------------------------------ !
