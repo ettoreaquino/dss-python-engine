@@ -1,4 +1,4 @@
-Clear 
+// Clear 
 
 ! This script is based on a script developed by Tennessee Tech Univ students
 ! Tyler Patton, Jon Wood, and David Woods, April 2009
@@ -22,7 +22,7 @@ redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Loads
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Lines_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Capacitors_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Switches_IEEE13.dss"
-redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\PV_IEEE13.dss"
+// redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\PV_IEEE13.dss"
 redirect "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\components\Monitors_IEEE13.dss"
 BusCoords "C:\repos\dss-python-engine\src\dss-models\ieee-13-bus\IEEE13Node_XYCoordinates.csv"
 
@@ -38,10 +38,10 @@ New EnergyMeter.medidor1 element=Line.650632 terminal=1
 Set Voltagebases=[115, 4.16, .48]
 calcVoltagebases
 
-Set Controlmode=OFF
- set mode=daily
- set stepsize=1h
- set number=12
+// Set Controlmode=OFF
+//  set mode=daily
+//  set stepsize=1h
+//  set number=12
 ! Solve
 ! ------------------------------------------------------------------------------------------------ !
 

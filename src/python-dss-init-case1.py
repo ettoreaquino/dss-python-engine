@@ -23,6 +23,7 @@ class DSS(object):
         self.dssObj.ClearAll()
 
         # Load the given circuit master file into OpenDSS
+        self.dssText.Command = "Clear"
         self.dssText.Command = "Compile " + dssFileName
 
     def mySolve(self):
@@ -38,10 +39,15 @@ class DSS(object):
         version = self.dssObj.Version
         return version
 
+    def get_data(self):
+        self.dssText.Command = "Export Powers as 'results\\case1\\power.csv'"
+        self.dssText.Command = "Export Voltages 'results\\case1\\voltages.csv'"
+
 if __name__ == '__main__':
-    myObject = DSS('dss-models\ieee-13-bus\IEEE13-main.dss')
+    myObject = DSS('C:\\repos\\dss-python-engine\\src\\IEEE13-main-case1.dss')
 
     myObject.mySolve()
     myObject.myShowPower()
     opendssVersion = myObject.versionDSS()
+    myObject.get_data()
     print opendssVersion
