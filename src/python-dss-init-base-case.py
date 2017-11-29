@@ -40,7 +40,12 @@ class DSS(object):
 
         self.VA = list(self.dssCircuit.AllNodeVmagPUByPhase(1))
         self.dist_a = list(self.dssCircuit.AllNodeDistancesByPhase(1))
-        print self.dist_a
+
+        self.VB = list(self.dssCircuit.AllNodeVmagPUByPhase(2))
+        self.dist_b = list(self.dssCircuit.AllNodeDistancesByPhase(2))
+
+        self.VB = list(self.dssCircuit.AllNodeVmagPUByPhase(3))
+        self.dist_b = list(self.dssCircuit.AllNodeDistancesByPhase(3))
 
     def myShowPower(self):
 
@@ -52,8 +57,8 @@ class DSS(object):
         return version
 
     def get_data(self):
-        self.dssText.Command = "Export Powers as 'results\\case2\\%s'"%(self.power_file_name)
-        self.dssText.Command = "Export Voltages 'results\\case2\\%s'"%(self.voltage_file_name)
+        self.dssText.Command = "Export Powers as 'results\\base\\%s'"%(self.power_file_name)
+        self.dssText.Command = "Export Voltages 'results\\base\\%s'"%(self.voltage_file_name)
 
 def transform_list_into_sring(_list):
     return str(_list)
@@ -63,23 +68,23 @@ def take_out_commas(text):
     return text
 
 def save_to_matalb_file(text):
-    matlab_file = open("results\\case2\\matlab.m", "w")
+    matlab_file = open("results\\base\\matlab.m", "w")
     matlab_file.write("graph = " + text)
     matlab_file.close()
 
 if __name__ == '__main__':
-    voltage = []
+    voltageA = []
 
     for i in range(1, 25):
         myObject = DSS(
-            'C:\\repos\\dss-python-engine\\src\\IEEE13-main-case2.dss',
+            'C:\\repos\\dss-python-engine\\src\\IEEE13-main-base-case.dss',
             i,
             "power_hour_%s.csv"%(i),
             "voltage_hour_%s.csv"%(i))
         myObject.mySolve()
         opendssVersion = myObject.versionDSS()
         myObject.get_data()
-        voltage.append(myObject.VA)
+        voltageA.append(myObject.VA)
     
     voltage_string = transform_list_into_sring(voltage)
     formated_voltage = take_out_commas(voltage_string)

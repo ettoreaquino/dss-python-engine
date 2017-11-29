@@ -30,7 +30,7 @@ New EnergyMeter.medidor1 element=Line.650632 terminal=1
 ! ------------------------------------------- Solve Setup ---------------------------------------- !
 Set Voltagebases=[115, 4.16, .48]
 calc
-Set Controlmode=OFF
+// Set Controlmode=OFF
  set mode=daily
  set stepsize=1h
 ! ------------------------------------------------------------------------------------------------ !

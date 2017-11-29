@@ -40,11 +40,11 @@ class DSS(object):
         return version
 
     def get_data(self):
-        self.dssText.Command = "Export Powers as 'results\\case1\\power.csv'"
-        self.dssText.Command = "Export Voltages 'results\\case1\\voltages.csv'"
+        self.dssText.Command = "Export Powers as 'results\\default\\power.csv'"
+        self.dssText.Command = "Export Voltages 'results\\default\\voltages.csv'"
 
 if __name__ == '__main__':
-    myObject = DSS('C:\\repos\\dss-python-engine\\src\\IEEE13-main-case1.dss')
+    myObject = DSS('C:\\repos\\dss-python-engine\\src\\IEEE13-main-default-case.dss')
 
     myObject.mySolve()
     myObject.myShowPower()
