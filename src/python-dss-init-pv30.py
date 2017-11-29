@@ -57,8 +57,8 @@ class DSS(object):
         return version
 
     def get_data(self):
-        self.dssText.Command = "Export Powers as 'results\\base-control-off\\%s'"%(self.power_file_name)
-        self.dssText.Command = "Export Voltages 'results\\base-control-off\\%s'"%(self.voltage_file_name)
+        self.dssText.Command = "Export Powers as 'results\\pv30\\%s'"%(self.power_file_name)
+        self.dssText.Command = "Export Voltages 'results\\pv30\\%s'"%(self.voltage_file_name)
 
 def transform_list_into_sring(_list):
     return str(_list)
@@ -70,7 +70,7 @@ def take_out_commas(text):
 def create_data_file(voltage, file_name):
     line_length = len(voltage)
     col_length = len(voltage[0])
-    dat_file = open("results\\base-control-off\\%s"%(file_name), "w")
+    dat_file = open("results\\pv30\\%s"%(file_name), "w")
 
     for i in range(0, col_length):
         for j in range(0, line_length):
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     for i in range(1, 25):
         myObject = DSS(
-            'C:\\repos\\dss-python-engine\\src\\IEEE13-main-base-case-control-off.dss',
+            'C:\\repos\\dss-python-engine\\src\\IEEE13-main-pv.dss',
             i,
             "power_hour_%s.csv"%(i),
             "voltage_hour_%s.csv"%(i))
