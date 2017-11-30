@@ -8,13 +8,16 @@ import re
 
 class DSS(object):
 
-    def __init__(self, dssFileName, hour, power_file_name, voltage_file_name):
+    def __init__(self, dssFileName, hour, power_file_name, voltage_file_name, folder_name):
 
         # Create a new instance of the DSS
         self.dssObj = win32com.client.Dispatch("OpenDSSEngine.DSS")
         self.hour = hour
         self.power_file_name = power_file_name
         self.voltage_file_name = voltage_file_name
+        self.folder_name = folder_name
+        self.result_path = os.path.join("C:\\", "repos", "dss-python-engine", "src", "results", folder_name)
+        self.create_result_dir()
 
         # Start the DSS
         if self.dssObj.Start(0) == False:
@@ -58,8 +61,12 @@ class DSS(object):
         return version
 
     def get_data(self):
-        self.dssText.Command = "Export Powers as 'results\\pv30\\%s'"%(self.power_file_name)
-        self.dssText.Command = "Export Voltages 'results\\pv30\\%s'"%(self.voltage_file_name)
+        self.dssText.Command = "Export Powers as 'results\\%s\\%s'"%(self.folder_name, self.power_file_name)
+        self.dssText.Command = "Export Voltages 'results\\%s\\%s'"%(self.folder_name, self.voltage_file_name)
+
+    def create_result_dir(self):
+        if not os.path.exists(self.result_path):
+            os.makedirs(self.result_path)
 
 def transform_list_into_sring(_list):
     return str(_list)
@@ -68,10 +75,10 @@ def take_out_commas(text):
     text = re.sub(",", "", text)
     return text
 
-def create_data_file(voltage, file_name):
+def create_data_file(voltage, file_name, folder_name):
     line_length = len(voltage)
     col_length = len(voltage[0])
-    dat_file = open("results\\pv30\\%s"%(file_name), "w")
+    dat_file = open("results\\%s\\%s"%(folder_name, file_name), "w")
 
     for i in range(0, col_length):
         for j in range(0, line_length):
@@ -111,13 +118,15 @@ if __name__ == '__main__':
 
     for i in range(pv, 500 + pv, pv):
         create_ieee13_main_pv(count, pv)
+        folder_name = "pv_%s"%(i)
 
         for j in range(1, 25):
             myObject = DSS(
                 'C:\\repos\\dss-python-engine\\src\\IEEE13-main-pv.dss',
                 i,
                 "power_hour_%s.csv"%(j),
-                "voltage_hour_%s.csv"%(j))
+                "voltage_hour_%s.csv"%(j),
+                folder_name)
             myObject.mySolve()
             opendssVersion = myObject.versionDSS()
             myObject.get_data()
@@ -126,6 +135,6 @@ if __name__ == '__main__':
             voltageC.append(myObject.VC)
         count += 1
 
-        create_data_file(voltageA, "voltage_phase_A.dat")
-        create_data_file(voltageB, "voltage_phase_B.dat")
-        create_data_file(voltageC, "voltage_phase_C.dat")
+        create_data_file(voltageA, "voltage_phase_A.dat", folder_name)
+        create_data_file(voltageB, "voltage_phase_B.dat", folder_name)
+        create_data_file(voltageC, "voltage_phase_C.dat", folder_name)

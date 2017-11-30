@@ -1,0 +1,18 @@
+
+New Loadshape.Irradiance_Jan07_2017 npts=24 interval=0
+~ csvfile= "C:\repos\dss-python-engine\src\stochastic-data\energisa-2017\irradiance.csv"
+New Tshape.Temperature_Jan07_2017 npts=24 interval=0
+~ csvfile="C:\repos\dss-python-engine\src\stochastic-data\energisa-2017\temperature.csv"
+                   
+
+New XYCurve.PV634_1_PvsT npts=4  xarray=[0  25  75  100]  yarray=[1.2 1.0 0.8  0.6]
+New XYCurve.PV634_1_Eff npts=4  xarray=[.1  .2  .4  1.0]  yarray=[.86  .9  .93  .97] 
+New PVSystem.PV634_1 phases=3 bus1=681.1.2.3 kV=0.48  kVA=10  irrad=.98  Pmpp=25 temperature=25 PF=1 %cutin=0.1 %cutout=0.1
+~ effcurve=PV634_1_Eff  P-TCurve=PV634_1_PvsT Daily=Irradiance_Jan07_2017  TDaily=Temperature_Jan07_2017
+                
+
+New XYCurve.PV634_2_PvsT npts=4  xarray=[0  25  75  100]  yarray=[1.2 1.0 0.8  0.6]
+New XYCurve.PV634_2_Eff npts=4  xarray=[.1  .2  .4  1.0]  yarray=[.86  .9  .93  .97] 
+New PVSystem.PV634_2 phases=3 bus1=681.1.2.3 kV=0.48  kVA=10  irrad=.98  Pmpp=25 temperature=25 PF=1 %cutin=0.1 %cutout=0.1
+~ effcurve=PV634_2_Eff  P-TCurve=PV634_2_PvsT Daily=Irradiance_Jan07_2017  TDaily=Temperature_Jan07_2017
+                
